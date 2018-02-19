@@ -1,21 +1,21 @@
 Package: followr
 Version: 0.0.0.9000
 Title: Tidy data from the Follow The Money API
-Description: The Follow the Money API 
-<https://followthemoney.org/our-data/apis/> provides programmatic access to data
-on political contributions for state elections.  The 'followr' package wraps 
-this API and returns the data as tidy data frames that are suitbale for futher 
-analysis and manipulation with packages from the 'tidyverse'.  This package is 
-not officially supported by Follow the Money, it's parent organization The 
-National Institute on Money in State Politics <https://www.followthemoney.org/>, 
-or the Tidyverse. 
+Description: The Follow the Money API <https://followthemoney.org/our-data/apis/> 
+  provides programmatic access to data on political contributions for state 
+  elections.  The 'followr' package wraps this API and returns the data as tidy 
+  data frames that are suitbale for futher analysis and manipulation with 
+  packages from the 'tidyverse'.  This package is not officially supported by 
+  Follow the Money, it's parent organization The National Institute on Money in 
+  State Politics <https://www.followthemoney.org/>, or the Tidyverse. 
 Authors@R: person("Jeffrey", "Hollister", email = "jeff.w.hollister@gmail.com", role = c("aut", "cre"))
 License: MIT
 Depends: R (>= 3.2.0)
 Imports: 
-dplyr,
-tibble,
-httr
+  dplyr,
+  tibble,
+  httr
 Encoding: UTF-8
 LazyData: true
 ByteCompile: true
+RoxygenNote: 6.0.1
