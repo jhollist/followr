@@ -14,20 +14,24 @@ flw_get_contributions <- function(state = NULL, year = NULL, entity = NULL,
            environment variable.")
     }
   }
-  url <- paste0("http://api.followthemoney.org/?mode=json", "&APIKey=", api_key)
+
+  working <- "https://api.followthemoney.org/?f-fc=2&c-t-eid=6404143&gro=y,d-eid&APIKey=40dc88029cfee6ac7c70142f41f895b2&mode=json&y=2016"
+  url <- paste0("https://api.followthemoney.org/?mode=json", "&APIKey=", api_key)
 
   if(!is.null(state)){
     url <- paste0(url, "&s=", state)
   }
 
   if(!is.null(year)){
-    url <- paste0(url,"&y=", year)
+    url <- paste0(url, "&y=", year)
   }
 
   if(!is.null(entity)){
+    url <- paste0(url, "&eid=", entity)
 
   }
 
-  request<-httr::GET(url, httr::accept("text/plain"))
-  httr::content(request, "text", encoding = "UTF-8")
+  request<-httr::GET(working, httr::accept("application/json"))
+  content<-httr::content(request, "text", encoding = "UTF-8")
+  records<-jsonlite::fromJSON(content)$records
 }
