@@ -15,6 +15,13 @@ flw_get_contributions <- function(state = NULL, year = NULL, entity = NULL,
     }
   }
 
+  eid <- "http://api.followthemoney.org/?y=2014&c-t-eid=2922304&gro=d-id&APIKey=40dc88029cfee6ac7c70142f41f895b2&mode=json"
+  cid <- "http://api.followthemoney.org/?c-t-id=163302&gro=d-id&APIKey=40dc88029cfee6ac7c70142f41f895b2&mode=json"
+  ids <- "http://api.followthemoney.org/?s=IL&y=2014&gro=c-t-id&APIKey=40dc88029cfee6ac7c70142f41f895b2&mode=json"
+
+
+
+
   working <- "https://api.followthemoney.org/?f-fc=2&c-t-eid=6404143&gro=y,d-eid,c-t-id&APIKey=40dc88029cfee6ac7c70142f41f895b2&mode=json&y=2016"
   url <- paste0("https://api.followthemoney.org/?mode=json", "&APIKey=", api_key)
 
@@ -31,7 +38,7 @@ flw_get_contributions <- function(state = NULL, year = NULL, entity = NULL,
 
   }
 
-  request<-httr::GET(working, httr::accept("application/json"))
+  request<-httr::GET(ids, httr::accept("application/json"))
   content<-httr::content(request, "text", encoding = "UTF-8")
   records<-jsonlite::fromJSON(content)$records #returns nested df's
 }
