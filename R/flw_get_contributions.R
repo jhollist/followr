@@ -24,12 +24,13 @@ flw_get_contributions <- function(state = NULL, year = NULL, entity = NULL,
   }
 
   # examples
+  api_key <- "9632361b2967ef9cab742fb80180d779"
   #eid <- "http://api.followthemoney.org/?y=2016&s=RI&gro=d-id&APIKey=40dc88029cfee6ac7c70142f41f895b2&mode=json"
   #cid <- "http://api.followthemoney.org/?c-t-id=163302&gro=d-id&APIKey=40dc88029cfee6ac7c70142f41f895b2&mode=json"
   ids <- "http://api.followthemoney.org/?s=RI&y=2016&gro=y,c-t-id&APIKey=40dc88029cfee6ac7c70142f41f895b2&mode=json"
   #working <- "https://api.followthemoney.org/?f-fc=2&c-t-eid=6404143&gro=y,d-eid,c-t-id&APIKey=40dc88029cfee6ac7c70142f41f895b2&mode=json&y=2016"
 
-  url <- paste0("https://api.followthemoney.org/?mode=json&gro=d-id", "&APIKey=", api_key)
+  url <- paste0("https://api.followthemoney.org/?mode=json&gro=c-t-eid,y,d-id", "&APIKey=", api_key)
 
   if(!is.null(state)){
     url <- paste0(url, "&s=", paste0(state, collapse = ","))
@@ -48,7 +49,19 @@ flw_get_contributions <- function(state = NULL, year = NULL, entity = NULL,
 
   request<-httr::GET(url, httr::accept("application/json"))
   content<-jsonlite::fromJSON(httr::content(request, "text", encoding = "UTF-8"))
-  content$metaInfo$paging$maxPage
   records<-content$records #returns nested df's
+  contributions <- tbl_df(candidate,
+                          office,
+                          year,
+                          state,
+                          contributers = records$Contributor$Contributor,
+                          general_industry = records$General_Industry$General_Industry,
+                          broad_sector = records$Broad_Sector$Broad_Sector,
+                          date = records$Date$Date,
+                          street,
+                          city,
+                          state,
+                          zip,
+                          ammount)
   View(records)
 }
