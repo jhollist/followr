@@ -50,18 +50,18 @@ flw_get_contributions <- function(state = NULL, year = NULL, entity = NULL,
   request<-httr::GET(url, httr::accept("application/json"))
   content<-jsonlite::fromJSON(httr::content(request, "text", encoding = "UTF-8"))
   records<-content$records #returns nested df's
-  contributions <- tbl_df(candidate,
-                          office,
-                          year,
-                          state,
-                          contributers = records$Contributor$Contributor,
+  contributions <- tibble::data_frame(candidate = records$Career_Summary$Career_Summary,
+                          election_year = records$Election_Year$Election_Year,
+                          state = records$State$State,
+                          contributors = records$Contributor$Contributor,
                           general_industry = records$General_Industry$General_Industry,
                           broad_sector = records$Broad_Sector$Broad_Sector,
-                          date = records$Date$Date,
-                          street,
-                          city,
-                          state,
-                          zip,
-                          ammount)
-  View(records)
+                          contribution_date = records$Date$Date,
+                          contributor_street = records$Street$id,
+                          contributor_city = records$City$City,
+                          contributor_state = records$State$State,
+                          contributor_zip = records$Zip$Zip,
+                          ammount = records$Amount$Amount)
+  #iterate through rest of the pages...
+  View(contributions)
 }
