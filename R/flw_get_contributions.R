@@ -29,7 +29,7 @@ flw_get_contributions <- function(state = NULL, year = NULL, entity = NULL,
   ids <- "http://api.followthemoney.org/?s=RI&y=2016&gro=y,c-t-id&APIKey=40dc88029cfee6ac7c70142f41f895b2&mode=json"
   #working <- "https://api.followthemoney.org/?f-fc=2&c-t-eid=6404143&gro=y,d-eid,c-t-id&APIKey=40dc88029cfee6ac7c70142f41f895b2&mode=json&y=2016"
 
-  url <- paste0("https://api.followthemoney.org/?mode=json", "&APIKey=", api_key)
+  url <- paste0("https://api.followthemoney.org/?mode=json&gro=d-id", "&APIKey=", api_key)
 
   if(!is.null(state)){
     url <- paste0(url, "&s=", paste0(state, collapse = ","))
