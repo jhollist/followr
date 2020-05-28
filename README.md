@@ -1,3 +1,5 @@
+![dormant](https://img.shields.io/badge/lifecycle-dormant-blue.svg)
+
 # followr
 R Package for accessing the Follow The Money API <https://followthemoney.org/our-data/apis/>
 
